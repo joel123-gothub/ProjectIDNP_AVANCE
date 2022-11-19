@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="strCategorias">
+        <item>PET O PETE - botellas, envase farmaceúticos...</item>
+        <item>HDPE - Envases no transparentes...</item>
+        <item>PVC - tarjetas, tuberias...</item>
+        <item>LDPE - bolsas, film adhesivo...</item>
+        <item>PP - tupper, jeringas, tapones...</item>
+        <item>PS - vasos ,cubiertos...</item>
+    </string-array>
+</resources>

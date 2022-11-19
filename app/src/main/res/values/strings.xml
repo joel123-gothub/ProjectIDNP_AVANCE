@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Project IDNP</string>
+    <string name="aniadir_text">Agregando Plástico</string>
+
+
+    <string name="hint_nombre_plastic">Nombre del Plástico</string>
+    <string name="hint_origen_plastic">Origen</string>
+    <string name="hint_ubicación_plastic">Ubicación</string>
+    <string name="hint_descripción_plastic">Descripción</string>
+    <string name="hint_fecha_plastic">Fecha</string>
+
+    <string name="btn_foto_plastic">Tomar foto Plástico</string>
+    <string name="btn_registrar_plastic">Registrar mi plástico</string>
+
+</resources>
