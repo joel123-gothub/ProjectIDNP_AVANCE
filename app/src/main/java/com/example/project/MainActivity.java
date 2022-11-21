@@ -3,11 +3,11 @@ package com.example.project;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -18,8 +18,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.example.project.db.DbHelper;
+import com.example.project.db.DbPlastico;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,19 +34,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        txtNombrePlastic = findViewById(R.id.txtNamePlastic);
-        txtFecPlastic = findViewById(R.id.txtFecPlastic);
-        txtOrigenPlastic= findViewById(R.id.txtOrigenPlastic);
-        txtUbicacionPlastic = findViewById(R.id.txtUbicationPlastic);
-        txtDescripcionPlastic= findViewById(R.id.txtDescriptionPlastic);
-        categoriaPlastic = findViewById(R.id.categoria_plastic);
-
-        btnRegistrarPlastic = findViewById(R.id.btnRegistrar);
-        btnTomarFotoPlastic = findViewById(R.id.btnCamara);
-
-        imgfotoPlastic = findViewById(R.id.FotoPlastic);
-
-        ArrayList<ArrayList<String>> lista = new ArrayList<ArrayList<String>>();
+        initUI(); //asignaciones
+        crearDB(); //creación DB
 
         btnTomarFotoPlastic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,18 +53,15 @@ public class MainActivity extends AppCompatActivity {
                 String OrigenPL = txtOrigenPlastic.getText().toString();
                 String UbicacionPL = txtUbicacionPlastic.getText().toString();
                 String DescripcionPL = txtDescripcionPlastic.getText().toString();
-
+                String categoriaPL = categoriaPlastic.getSelectedItem().toString();
 
                 if (!NombrePl.isEmpty() && !FecPl.isEmpty() && !OrigenPL.isEmpty() && !UbicacionPL.isEmpty() && !DescripcionPL.isEmpty()) {
-                    boolean flag = lista.add(new ArrayList<String>(Arrays.asList(NombrePl, FecPl, OrigenPL, UbicacionPL, DescripcionPL)));
-                    if (flag) {
-                        txtNombrePlastic.setText("");
-                        txtFecPlastic.setText("");
-                        txtOrigenPlastic.setText("");
-                        txtUbicacionPlastic.setText("");
-                        txtDescripcionPlastic.setText("");
+                    DbPlastico dbPlastico = new DbPlastico(MainActivity.this);
+                    long id = dbPlastico.registrarPlastico(NombrePl, FecPl, OrigenPL, UbicacionPL, DescripcionPL, categoriaPL);
 
-                        Toast.makeText(MainActivity.this, "Plástico agregado exitasamente!!", Toast.LENGTH_LONG).show();
+                    if( id > 0) {
+                        Toast.makeText(MainActivity.this, "Plástico registrado exitasamente!!", Toast.LENGTH_LONG).show();
+                        Limpiar();
                     } else {
                         Toast.makeText(MainActivity.this, "Ups, Ocurrió un error en registro!!", Toast.LENGTH_LONG).show();
                     }
@@ -96,4 +83,40 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     });
+
+    //Creacion db
+    private void crearDB() {
+        DbHelper dbHelper = new DbHelper(MainActivity.this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase(); //escribir en db
+        if(db != null) {
+            Toast.makeText(MainActivity.this, "BASE DE DATOS CREADA", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(MainActivity.this, "ERROR AL CREAR BASE DE DATOS", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    //Limpiar campos registro
+    private void Limpiar() {
+        txtNombrePlastic.setText("");
+        txtFecPlastic.setText("");
+        txtOrigenPlastic.setText("");
+        txtUbicacionPlastic.setText("");
+        txtDescripcionPlastic.setText("");
+    }
+
+    //initUI
+    private void initUI() {
+        //Asignaciones
+        txtNombrePlastic = findViewById(R.id.txtNamePlastic);
+        txtFecPlastic = findViewById(R.id.txtFecPlastic);
+        txtOrigenPlastic= findViewById(R.id.txtOrigenPlastic);
+        txtUbicacionPlastic = findViewById(R.id.txtUbicationPlastic);
+        txtDescripcionPlastic= findViewById(R.id.txtDescriptionPlastic);
+        categoriaPlastic = findViewById(R.id.categoria_plastic);
+
+        btnRegistrarPlastic = findViewById(R.id.btnRegistrar);
+        btnTomarFotoPlastic = findViewById(R.id.btnCamara);
+
+        imgfotoPlastic = findViewById(R.id.FotoPlastic); //por procesar
+    }
 }
