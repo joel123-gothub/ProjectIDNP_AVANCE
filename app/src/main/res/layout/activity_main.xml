@@ -12,6 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="vertical">
 
 
@@ -20,8 +21,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="sans-serif-black"
             android:text="@string/aniadir_text"
             android:textAlignment="center"
+            android:textColor="#3F51B5"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -30,16 +33,22 @@
 
         <ImageView
             android:id="@+id/FotoPlastic"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_width="65dp"
+            android:layout_height="81dp"
+            android:layout_marginTop="40dp"
+            android:layout_weight="1"
+            android:scaleX="2"
+            android:scaleY="2"
+            app:srcCompat="@drawable/take_photo_background" />
 
         <Button
             android:id="@+id/btnCamara"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
+            android:backgroundTint="#3F51B5"
             android:gravity="center_horizontal"
             android:text="@string/btn_foto_plastic"
             android:textSize="12sp" />
@@ -51,8 +60,10 @@
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:ems="10"
+            android:fontFamily="sans-serif"
             android:hint="@string/hint_nombre_plastic"
             android:inputType="textPersonName"
+            android:textColorHint="#2196F3"
             tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
 
         <EditText
@@ -64,6 +75,7 @@
             android:ems="10"
             android:hint="@string/hint_fecha_plastic"
             android:inputType="date"
+            android:textColorHint="#2196F3"
             tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
 
         <EditText
@@ -75,6 +87,7 @@
             android:ems="10"
             android:hint="@string/hint_origen_plastic"
             android:inputType="textPersonName"
+            android:textColorHint="#2196F3"
             tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
 
         <EditText
@@ -86,6 +99,7 @@
             android:ems="10"
             android:hint="@string/hint_ubicación_plastic"
             android:inputType="textPersonName"
+            android:textColorHint="#2196F3"
             tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
 
         <EditText
@@ -98,6 +112,7 @@
             android:hint="@string/hint_descripción_plastic"
             android:inputType="textMultiLine|textPersonName"
             android:lines="5"
+            android:textColorHint="#2196F3"
             tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
 
         <Spinner
@@ -106,7 +121,10 @@
             android:layout_height="35dp"
             android:layout_marginTop="15dp"
             android:layout_weight="1"
+            android:backgroundTint="#3F51B5"
+            android:backgroundTintMode="add"
             android:entries="@array/strCategorias"
+            android:foregroundTint="#3F51B5"
             tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
 
         <Button
@@ -115,6 +133,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_weight="1"
+            android:backgroundTint="#3F51B5"
             android:text="@string/btn_registrar_plastic"
             android:textSize="16sp" />
 
