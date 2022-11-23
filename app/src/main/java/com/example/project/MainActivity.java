@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 camaraLauncher.launch(new Intent(MediaStore.ACTION_IMAGE_CAPTURE)); //obtener foto y mostrarlo
+                btnTomarFotoPlastic.setText("CAMBIAR IMAGEN PLÁSTICO");
             }
         });
 
